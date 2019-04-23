@@ -1,0 +1,32 @@
+{
+    "pages": [
+        "pages/devices/index/index",
+        "pages/devices/show/show",
+        "pages/more/index/index",
+        "pages/bluetooth/index/index"
+    ],
+    "window": {
+        "backgroundTextStyle":"light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "蓝牙测试",
+        "navigationBarTextStyle":"black"
+    },
+    "tabBar": {
+        "color": "#515151",
+        "selectedColor": "#1afa29",
+        "list": [
+            {
+                "pagePath": "pages/devices/index/index",
+                "text": "设备",
+                "iconPath": "images/device.png",
+                "selectedIconPath": "images/device-select.png"
+            },
+            {
+                "pagePath": "pages/more/index/index",
+                "text": "更多",
+                "iconPath": "images/more.png",
+                "selectedIconPath": "images/more-select.png"
+            }
+        ]
+    }
+}

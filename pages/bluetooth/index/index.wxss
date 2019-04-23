@@ -1,0 +1,36 @@
+/**index.wxss**/
+.container {
+  padding: 0 16px 0 16px;
+  align-items: center;
+}
+.list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0 10px 0;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-style: none none solid none;
+  border-bottom-color: lightgray;
+}
+.list-item:last-child {
+  border-style: none;
+}
+.button {
+  height: 50px;
+  width: 50%;
+  position: fixed;
+  bottom: 400rpx;
+}
+
+.info_panel {
+  margin: 20rpx 20rpx 20rpx 0;
+  border-left: 10rpx solid #ccc;
+  font-size: 26rpx;
+  color: #999;
+  left: 20rpx;
+  bottom: 0rpx;
+  position: fixed;
+}

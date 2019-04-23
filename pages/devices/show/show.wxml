@@ -1,0 +1,51 @@
+<view class="container">
+    <view class="head">
+        <view class="name">{{name}}</view>
+        <view class="info">共开门 {{openDoorNum}} 次，电量 {{qoe}}</view>
+    </view>
+    <view class="weui-grids">
+        <view class="weui-grid" bindtap="bleOpenDoor">
+            <view class='weui-grid__bg'>
+                <view class="weui-grid__icon">
+                    <image src="/images/device/open.png" mode="scaleToFill" />
+                </view>
+                <text class="weui-grid__label">开门</text>
+            </view>
+        </view>
+        <view class="weui-grid" data-type="1" data-name="指纹" bindtap="settingFinger">
+            <view class='weui-grid__bg'>
+                <view class="weui-grid__icon">
+                    <image src="/images/device/finger.png" mode="scaleToFill" />
+                </view>
+                <text class="weui-grid__label">设置指纹</text>
+            </view>
+        </view>
+        <view class="weui-grid" data-type="2" data-name="密码" bindtap="settingPassword">
+            <view class='weui-grid__bg'>
+                <view class='weui-grid__bg' >
+                    <view class="weui-grid__icon">
+                        <image src="/images/device/password.png" mode="scaleToFill" />
+                    </view>
+                    <text class="weui-grid__label">设置密码</text>
+                </view>
+            </view>
+        </view>
+        <view class="weui-grid" data-type="3" data-name="IC卡" bindtap="settingICCard">
+            <view class='weui-grid__bg'>
+                <view class="weui-grid__icon">
+                    <image src="/images/device/ic.png" mode="scaleToFill" />
+                </view>
+                <text class="weui-grid__label">设置IC卡</text>
+            </view>
+        </view>
+    </view>
+    <view class="info_panel">
+        <view>
+            <view>Tips</view>
+            <view>1. 云锁按下"0#"开启蓝牙后，再开始连接蓝牙</view>
+            <view>2. 后退到设备列表页面将断开当前蓝牙连接</view>
+        </view>
+    </view>
+
+    <button class="button" type="primary" plain="true" bindtap="connectBluetooth">{{connectBleName}}</button>
+</view>

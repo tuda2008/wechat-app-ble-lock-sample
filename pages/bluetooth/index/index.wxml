@@ -1,0 +1,25 @@
+<view class="container">
+  <scroll-view scroll-y style="left:16px;right:16px;width:{{list_width}}px;height:{{list_height}}px">
+    <block wx:for="{{devices_list}}" wx:key="{{id}}" wx:for-index="{{idx}}">
+      <view class="list-item" id="{{item.deviceId}}" bindtap="ConnectTo">
+        <view style="display:flex;flex-direction:column;width:80%">
+          <text style="font-size:medium;word-break:break-all">#{{idx}} 设备名称: {{item.name}}</text>
+          <text style="font-size:x-small;color:gray;word-break:break-all">设备ID: {{item.deviceId}}</text>
+          <text style="font-size:x-small;color:gray;word-break:break-all">广播数据: {{item.advertisData}}</text>
+          <text style="font-size:x-small;color:gray;word-break:break-all">信号强度RSSI: {{item.RSSI}}</text>
+        </view>
+        <image style="width:50px;height:50px" mode="aspectFit" src="/images/bluetooth.png"></image>
+      </view>
+    </block>
+  </scroll-view>
+  <view class="info_panel">
+    <view>
+      <view>Tips</view>
+      <view>1. 请确保您已打开手机蓝牙</view>
+      <view>2. 请确保您已按下"0#"打开云锁蓝牙</view>
+      <view>3. 若无法找到云锁蓝牙，设置->权限管理->微信->您的位置—>开启后，请重试</view>
+    </view>
+  </view>
+
+  <button class="button" type="primary" plain="true" loading="{{searching}}" bindtap="searchBluetooth">{{searching?"搜索中...":"搜索蓝牙设备"}}</button>
+</view>
