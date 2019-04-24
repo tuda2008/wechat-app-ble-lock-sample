@@ -6,7 +6,7 @@ var devices_list = []
 var connectedDeviceId
 Page({
   data: {
-    name: "",
+    deviceName: "",
     oriDeviceId: "",
     code: "",
     serviceId: "",
@@ -236,7 +236,7 @@ Page({
               }, 1000);
               setTimeout(function () {
                 wx.redirectTo({
-                  url: '/pages/devices/show/show?id=' + that.data.oriDeviceId + '&bluetoothMac=' + deviceId + '&code=' + that.data.code + '&name=' + this.data.name,
+                  url: '/pages/devices/show/show?id=' + that.data.oriDeviceId + '&bluetoothMac=' + deviceId + '&code=' + that.data.code + '&name=' + that.data.deviceName,
                 })
               }, 1000);
             }
@@ -338,7 +338,7 @@ Page({
               })
               setTimeout(function () {
                 wx.redirectTo({
-                  url: '/pages/devices/show/show?id=' + that.data.oriDeviceId + '&bluetoothMac=' + e.currentTarget.id + '&code=' + that.data.code+ '&name=' + this.data.name,
+                  url: '/pages/devices/show/show?id=' + that.data.oriDeviceId + '&bluetoothMac=' + e.currentTarget.id + '&code=' + that.data.code+ '&name=' + that.data.deviceName,
                 })
               }, 1000);
             }
@@ -389,7 +389,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       autoConnect: true,
-      name: options.name,
+      deviceName: options.name,
       oriDeviceId: options.id,
       code: options.code,
       devices_list: [],

@@ -12,7 +12,7 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.2",
+	"libVersion": "2.6.6",
 	"appid": "wxf0a3da6416d7da5a",
 	"projectname": "wechat-ble-lock-sample",
 	"debugOptions": {
@@ -37,16 +37,8 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
-			"list": [
-				{
-					"id": 0,
-					"name": "测试分享",
-					"pathName": "pages/devices/index/index",
-					"query": "inviter_id=13&inviter_device_id=2",
-					"scene": null
-				}
-			]
+			"current": -1,
+			"list": []
 		}
 	}
 }
