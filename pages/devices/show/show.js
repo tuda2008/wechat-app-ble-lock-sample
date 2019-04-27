@@ -189,6 +189,7 @@ Page({
         sum = sum + cmd[i]
       }
       cmd.push(sum&0xff)
+      console.log(cmd)
       let cmdArray = new Uint8Array(cmd);
       setTimeout(() => {
         that.writeArray(cmdArray)
@@ -335,39 +336,79 @@ Page({
       return
     }
     wx.setStorageSync('lastCmdTime', Math.round(new Date().getTime()/1000))
-    setTimeout(() => {
-      wx.writeBLECharacteristicValue({
-        deviceId: wx.getStorageSync('connectedDeviceId'),
-        serviceId: wx.getStorageSync('serviceId'),
-        characteristicId: wx.getStorageSync('writeCharId'),
-        value: cmdArray.buffer,
-        success: function (res) {
-          wx.showToast({
-            title: '指令发送成功',
-            icon: 'success',
-            duration: 1000
+    let pos = 0;
+    let length = cmdArray.length;
+    while (length > 0) {
+      let tmpCmd;
+      if (length > 20) {
+        tmpCmd = cmdArray.slice(pos, pos + 20);
+        pos += 20;
+        length -= 20;
+        setTimeout(() => {
+          wx.writeBLECharacteristicValue({
+            deviceId: wx.getStorageSync('connectedDeviceId'),
+            serviceId: wx.getStorageSync('serviceId'),
+            characteristicId: wx.getStorageSync('writeCharId'),
+            value: tmpCmd.buffer,
+            success: function (res) { },
+            fail: function (res) {
+              if (res.errCode==10006 || res.errCode==0) {
+                wx.showToast({
+                  title: '云锁蓝牙已断开，请按"0#"唤醒蓝牙，然后重新连接',
+                  icon: 'none',
+                  duration: 2000
+                })
+                that.closeBleConnection()
+              } else {
+                wx.showToast({
+                  title: '指令发送失败',
+                  icon: 'none',
+                  duration: 2000
+                })
+              }
+              console.log(res)
+            }
           })
-          wx.setStorageSync('lastCmdTime', Math.round(new Date().getTime()/1000))
-        },
-        fail: function (res) {
-          if (res.errCode==10006 || res.errCode==0) {
-            wx.showToast({
-              title: '云锁蓝牙已断开，请按"0#"唤醒蓝牙，然后重新连接',
-              icon: 'none',
-              duration: 2000
-            })
-            that.closeBleConnection()
-          } else {
-            wx.showToast({
-              title: '指令发送失败',
-              icon: 'none',
-              duration: 2000
-            })
-          }
-          console.log(res)
-        }
-      })
-    }, 250)
+        }, 100)
+      } else {
+        tmpCmd = cmdArray.slice(pos, pos + length);
+        pos += length;
+        length -= length;
+        setTimeout(() => {
+          wx.writeBLECharacteristicValue({
+            deviceId: wx.getStorageSync('connectedDeviceId'),
+            serviceId: wx.getStorageSync('serviceId'),
+            characteristicId: wx.getStorageSync('writeCharId'),
+            value: tmpCmd.buffer,
+            success: function (res) {
+              wx.showToast({
+                title: '指令发送成功',
+                icon: 'success',
+                duration: 1000
+              })
+              wx.setStorageSync('lastCmdTime', Math.round(new Date().getTime()/1000))
+            },
+            fail: function (res) {
+              if (res.errCode==10006 || res.errCode==0) {
+                wx.showToast({
+                  title: '云锁蓝牙已断开，请按"0#"唤醒蓝牙，然后重新连接',
+                  icon: 'none',
+                  duration: 2000
+                })
+                that.closeBleConnection()
+              } else {
+                wx.showToast({
+                  title: '指令发送失败',
+                  icon: 'none',
+                  duration: 2000
+                })
+              }
+              console.log(res)
+            }
+          })
+        }, 150)
+      }
+    }
   },
 
 
